@@ -101,8 +101,6 @@ install_bins() {
     warn_node_engine "$node_engine"
     install_nodejs "$node_engine" "$BUILD_DIR/.heroku/node"
     install_npm "$npm_engine" "$BUILD_DIR/.heroku/node"
-    echo "Here is the lib dir"
-    ls "$OCI_LIB_DIR"
     install_oracle "/home/vcap/app/.heroku/node"
     echo "Here is the lib dir"
     ls "$OCI_LIB_DIR"
