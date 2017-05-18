@@ -71,7 +71,7 @@ create_env() {
   write_profile "$BP_DIR" "$BUILD_DIR"
   write_export "$BP_DIR" "$BUILD_DIR"
   export_env_dir "$ENV_DIR"
-  create_default_env "$BUILD_DIR"
+  create_default_env "/home/vcap/app"
 }
 
 header "Creating runtime environment"
@@ -99,7 +99,7 @@ install_bins() {
     mcount "version.iojs.$(node --version)"
   else
     warn_node_engine "$node_engine"
-    install_oracle "$BUILD_DIR/.heroku/node"
+    install_oracle "/home/vcap/app/.heroku/node"
     echo "Here is the lib dir"
     ls "$OCI_LIB_DIR"
     install_nodejs "$node_engine" "$BUILD_DIR/.heroku/node"
