@@ -1,9 +1,13 @@
 create_default_env() {
+  local build_dir="$1"
   export NPM_CONFIG_PRODUCTION=${NPM_CONFIG_PRODUCTION:-true}
   export NPM_CONFIG_LOGLEVEL=${NPM_CONFIG_LOGLEVEL:-error}
   export NODE_MODULES_CACHE=${NODE_MODULES_CACHE:-true}
   export NODE_ENV=${NODE_ENV:-production}
   export NODE_VERBOSE=${NODE_VERBOSE:-false}
+  export LD_LIBRARY_PATH="$build_dir/.heroku/node/instantclientbasic"
+  export OCI_LIB_DIR="$build_dir/.heroku/node/instantclientbasic"
+  export OCI_INC_DIR="$build_dir/.heroku/node/instantclientbasic/sdk/include"
 }
 
 list_node_config() {
@@ -11,6 +15,8 @@ list_node_config() {
   printenv | grep ^NPM_CONFIG_ || true
   printenv | grep ^YARN_ || true
   printenv | grep ^NODE_ || true
+  printenv | grep ^LD_LIBRARY_PATH || true
+  printenv | grep ^OCI_ || true
 
   if [ "$NPM_CONFIG_PRODUCTION" = "true" ] && [ "$NODE_ENV" != "production" ]; then
     echo ""
